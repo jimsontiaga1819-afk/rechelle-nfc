@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F2F0EA">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1024">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF1F6">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1B1026">
 <meta name="color-scheme" content="light dark">
 <title>Rechelle Suico</title>
 <meta name="description" content="You tapped Rechelle's keychain. Say hi on Facebook or Instagram.">
@@ -13,17 +13,17 @@
 <meta property="og:type" content="profile">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* NFC landing page. One standing character on a lit stage, navy + gold,
-   editorial serif name. Motion: idle sway only; she steps toward a link
-   when it is offered. transform/opacity only. */
+/* NFC landing page: soft pastel stage, one half-body character,
+   floating hearts. Motion uses transform/opacity only. */
 :root{
-  --paper:#F2F0EA; --ink:#141A33; --ink-soft:#5A6180;
-  --navy:#1E2850; --gold:#C8963C; --gold-soft:#E7C98A;
-  --stage:rgba(255,255,255,.85); --beam:rgba(240,226,196,.75); --cool:rgba(197,212,245,.7);
-  --card:#FFFFFF; --card-line:rgba(20,26,51,.09);
-  --shadow:rgba(30,40,80,.3); --contact:rgba(30,40,80,.28);
+  --cream:#FFF1F6; --pink:#FFC7DD; --lilac:#DCCBFF; --peach:#FFD9C0;
+  --ink:#4A2B45; --ink-soft:#8A6B86;
+  --accent:#FF7EB3; --accent-ink:#5E1437;
+  --card:rgba(255,255,255,.72); --card-line:rgba(255,160,200,.32);
+  --ring:rgba(255,255,255,.9); --ring2:rgba(255,199,221,.55);
+  --shadow:rgba(190,110,150,.3); --heart:rgba(255,145,190,.5); --aura:rgba(255,190,225,.75);
   --ease-out:cubic-bezier(0.23,1,0.32,1);
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -31,145 +31,176 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#0B1024; --ink:#F3F1EA; --ink-soft:#A2A8C6;
-    --stage:rgba(60,72,130,.5); --beam:rgba(200,150,60,.3); --cool:rgba(60,90,180,.35);
-    --card:rgba(255,255,255,.07); --card-line:rgba(255,255,255,.14);
-    --shadow:rgba(0,0,0,.6); --contact:rgba(0,0,0,.65);
+    --cream:#1B1026; --pink:#5B2A49; --lilac:#3A2A63; --peach:#5A3348;
+    --ink:#FDEBF4; --ink-soft:#CDA9C4;
+    --card:rgba(255,255,255,.1); --card-line:rgba(255,255,255,.16);
+    --ring:rgba(255,190,220,.2); --ring2:rgba(190,150,255,.18);
+    --shadow:rgba(0,0,0,.6); --heart:rgba(255,150,200,.3); --aura:rgba(220,170,255,.3);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0B1024; --ink:#F3F1EA; --ink-soft:#A2A8C6;
-  --stage:rgba(60,72,130,.5); --beam:rgba(200,150,60,.3); --cool:rgba(60,90,180,.35);
-  --card:rgba(255,255,255,.07); --card-line:rgba(255,255,255,.14);
-  --shadow:rgba(0,0,0,.6); --contact:rgba(0,0,0,.65);
+  --cream:#1B1026; --pink:#5B2A49; --lilac:#3A2A63; --peach:#5A3348;
+  --ink:#FDEBF4; --ink-soft:#CDA9C4;
+  --card:rgba(255,255,255,.1); --card-line:rgba(255,255,255,.16);
+  --ring:rgba(255,190,220,.2); --ring2:rgba(190,150,255,.18);
+  --shadow:rgba(0,0,0,.6); --heart:rgba(255,150,200,.3); --aura:rgba(220,170,255,.3);
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html{height:100%;background:var(--paper);-webkit-tap-highlight-color:transparent;
+html{height:100%;background:var(--cream);-webkit-tap-highlight-color:transparent;
   -webkit-text-size-adjust:100%;overscroll-behavior-y:none;
   scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100%;color:var(--ink);background:var(--paper);overflow-x:hidden;
-  font-family:Inter,"Segoe UI",system-ui,sans-serif}
+body{margin:0;min-height:100%;color:var(--ink);background:var(--cream);overflow-x:hidden;
+  font-family:Quicksand,"Segoe UI",system-ui,sans-serif;font-weight:500}
 a,button,[role="button"]{touch-action:manipulation}
 
-/* stage: one warm beam, one cool fill, both drifting slowly */
-.stage{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--paper)}
-.glow{position:absolute;display:block;border-radius:50%;filter:blur(64px);will-change:transform}
-.g1{width:88vmax;height:88vmax;left:50%;top:-34vmax;margin-left:-44vmax;background:var(--stage);
-  animation:drift1 24s ease-in-out infinite alternate}
-.g2{width:52vmax;height:52vmax;right:-18vmax;top:-6vmax;background:var(--beam);
-  animation:drift2 29s ease-in-out infinite alternate}
-.g3{width:56vmax;height:56vmax;left:-22vmax;top:26vmax;background:var(--cool);
-  animation:drift3 34s ease-in-out infinite alternate}
-@keyframes drift1{to{transform:translate3d(0,6vmax,0) scale(1.06)}}
-@keyframes drift2{to{transform:translate3d(-12vmax,14vmax,0) scale(.92)}}
-@keyframes drift3{to{transform:translate3d(14vmax,-10vmax,0) scale(1.1)}}
+/* pastel sky + floating hearts */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--cream)}
+.blob{position:absolute;display:block;border-radius:50%;filter:blur(58px);will-change:transform}
+.b1{width:74vmax;height:74vmax;left:-24vmax;top:-30vmax;background:var(--pink);
+  animation:f1 21s ease-in-out infinite alternate}
+.b2{width:58vmax;height:58vmax;right:-22vmax;top:4vmax;background:var(--lilac);
+  animation:f2 26s ease-in-out infinite alternate}
+.b3{width:52vmax;height:52vmax;left:6vmax;bottom:-26vmax;background:var(--peach);
+  animation:f3 31s ease-in-out infinite alternate}
+@keyframes f1{to{transform:translate3d(10vmax,12vmax,0) scale(1.08)}}
+@keyframes f2{to{transform:translate3d(-12vmax,16vmax,0) scale(.9)}}
+@keyframes f3{to{transform:translate3d(12vmax,-14vmax,0) scale(1.12)}}
+.hearts i{position:absolute;bottom:-40px;width:16px;height:16px;background:var(--heart);
+  -webkit-mask:var(--h) center/contain no-repeat;mask:var(--h) center/contain no-repeat;
+  --h:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21s-8-5.2-8-10.3A4.7 4.7 0 0 1 12 7a4.7 4.7 0 0 1 8 3.7C20 15.8 12 21 12 21z'/></svg>");
+  animation:rise-heart linear infinite}
+.hearts i:nth-child(1){left:8%;animation-duration:17s;animation-delay:-2s}
+.hearts i:nth-child(2){left:26%;width:11px;height:11px;animation-duration:22s;animation-delay:-9s}
+.hearts i:nth-child(3){left:48%;width:20px;height:20px;animation-duration:26s;animation-delay:-16s}
+.hearts i:nth-child(4){left:70%;width:13px;height:13px;animation-duration:19s;animation-delay:-5s}
+.hearts i:nth-child(5){left:88%;width:17px;height:17px;animation-duration:24s;animation-delay:-12s}
+@keyframes rise-heart{
+  0%{transform:translate3d(0,0,0) rotate(-8deg);opacity:0}
+  12%{opacity:1}
+  85%{opacity:.85}
+  100%{transform:translate3d(16px,-112vh,0) rotate(14deg);opacity:0}}
 
-.page{position:relative;z-index:1;max-width:440px;margin:0 auto;min-height:100svh;
-  padding:16px 22px 28px;display:flex;flex-direction:column}
+.page{position:relative;z-index:1;max-width:430px;margin:0 auto;min-height:100svh;
+  padding:16px 22px 26px;display:flex;flex-direction:column}
 
-.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;
-  padding:7px 15px;border-radius:999px;background:var(--card);border:1px solid var(--card-line);
-  font-size:.84rem;font-weight:500;letter-spacing:.01em;color:var(--ink-soft);
+.chip{align-self:center;display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:999px;background:var(--card);border:1px solid var(--card-line);
+  font-size:.85rem;font-weight:600;color:var(--ink-soft);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
   animation:ping 2.4s ease-out infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(200,150,60,.5)}100%{box-shadow:0 0 0 9px rgba(200,150,60,0)}}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,126,179,.55)}100%{box-shadow:0 0 0 9px rgba(255,126,179,0)}}
 
 /* hero */
-.hero{position:relative;flex:1 1 auto;min-height:260px;display:grid;place-items:end center;padding-bottom:22px;margin:2px 0 0}
-.floor{position:absolute;left:50%;bottom:28px;width:100px;height:16px;margin-left:-50px;
-  border-radius:50%;background:var(--contact);filter:blur(13px);transform-origin:50% 50%;
-  animation:breathe-shadow 5.4s ease-in-out infinite}
-@keyframes breathe-shadow{50%{transform:scale(1.07,.9);opacity:.84}}
-.figure{position:relative;width:112px;outline:none;cursor:pointer;border-radius:28px;
+.hero{position:relative;flex:1 1 auto;min-height:216px;display:grid;place-items:end center;padding-bottom:16px;margin-top:6px}
+.ring{position:absolute;left:50%;bottom:48px;width:216px;height:216px;margin-left:-108px;
+  border-radius:50%;background:radial-gradient(circle at 50% 45%,var(--ring) 0%,var(--ring2) 58%,transparent 72%);
+  animation:pulse-ring 6s ease-in-out infinite}
+@keyframes pulse-ring{50%{transform:scale(1.06);opacity:.85}}
+.figure{position:relative;width:188px;outline:none;cursor:pointer;border-radius:30px;
   user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
-  animation:arrive 1s .1s both var(--ease-out)}
-@keyframes arrive{from{opacity:0;transform:translate3d(0,42px,0) scale(.97)}to{opacity:1;transform:none}}
-.figure:focus-visible{outline:2px solid var(--gold);outline-offset:8px}
-.mover{transform-origin:50% 100%;will-change:transform}
-.her{display:block;width:100%;height:auto;pointer-events:none;transform-origin:50% 96%;
-  filter:drop-shadow(0 18px 20px var(--shadow))}
+  animation:pop-in .9s .1s both var(--ease-out)}
+@keyframes pop-in{from{opacity:0;transform:translate3d(0,34px,0) scale(.94)}to{opacity:1;transform:none}}
+.figure:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+.mover{transform-origin:50% 100%;will-change:transform;position:relative}
+.her{display:block;width:100%;height:auto;pointer-events:none;transform-origin:50% 88%;
+  filter:drop-shadow(0 10px 16px var(--shadow)) drop-shadow(0 0 22px var(--aura));
+  -webkit-mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,.55) 84%,transparent 99%);
+  mask-image:linear-gradient(180deg,#000 68%,rgba(0,0,0,.55) 84%,transparent 99%)}
+.glow{position:absolute;left:50%;top:34%;width:300px;height:300px;margin:-150px 0 0 -150px;
+  border-radius:50%;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle,var(--aura) 0%,transparent 68%);
+  filter:blur(8px);animation:aura 7s ease-in-out infinite}
+@keyframes aura{50%{transform:scale(1.12);opacity:.75}}
+.lids{position:absolute;left:33.810%;top:13.646%;width:29.048%;height:auto;
+  opacity:0;pointer-events:none}
 .her.hop{animation:hop .62s var(--ease-out)}
 @keyframes hop{
   0%{transform:scale(1,1)}
-  22%{transform:scale(1.035,.95)}
-  48%{transform:translate3d(0,-14px,0) scale(.985,1.03)}
-  74%{transform:scale(1.015,.99)}
+  22%{transform:scale(1.04,.95)}
+  48%{transform:translate3d(0,-13px,0) scale(.98,1.035)}
+  74%{transform:scale(1.016,.99)}
   100%{transform:scale(1,1)}}
 
-.bubble{position:absolute;top:2px;left:0;z-index:5;pointer-events:none;max-width:54%;
-  background:var(--navy);color:#fff;font-size:.92rem;font-weight:500;line-height:1.3;
-  padding:9px 15px;border-radius:16px 16px 16px 4px;box-shadow:0 12px 26px var(--shadow);
+.bubble{position:absolute;top:116px;left:0;z-index:5;pointer-events:none;max-width:46%;
+  background:#fff;color:#5E1437;font-size:.92rem;font-weight:600;line-height:1.3;
+  padding:10px 15px;border-radius:18px 18px 18px 6px;box-shadow:0 10px 22px var(--shadow);
   opacity:0;transform:translate3d(0,6px,0) scale(.96);transform-origin:0 100%;
   transition:opacity .22s var(--ease-out),transform .22s var(--ease-out)}
 .bubble.show{opacity:1;transform:none}
-.tap{position:absolute;left:0;right:0;bottom:0;margin:0;text-align:center;
-  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);opacity:.75}
+.tap{position:absolute;left:0;right:0;bottom:-2px;margin:0;text-align:center;
+  font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);opacity:.8}
 
 /* name */
-.intro{margin-top:10px}
-.role{margin:0 0 6px;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-h1{margin:0;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2.1rem,10vw,2.9rem);
-  line-height:1;letter-spacing:-.02em}
-.intro p{margin:9px 0 0;font-size:1.02rem;line-height:1.5;color:var(--ink-soft);max-width:32ch}
+.intro{text-align:center;margin-top:2px}
+.role{margin:0 0 4px;font-size:.78rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent)}
+h1{margin:0;font-family:"Baloo 2",Quicksand,sans-serif;font-weight:700;
+  font-size:clamp(2rem,9.5vw,2.7rem);line-height:1.08;letter-spacing:-.01em}
+.intro p{margin:7px auto 0;font-size:1rem;line-height:1.5;color:var(--ink-soft);max-width:28ch}
 
 /* links */
-.links{display:grid;gap:11px;margin-top:18px}
+.links{display:grid;gap:10px;margin-top:15px}
 .btn{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:13px;
-  padding:9px 18px 9px 9px;border-radius:18px;text-decoration:none;color:#fff;outline:none;overflow:hidden;
+  padding:9px 18px 9px 9px;border-radius:999px;text-decoration:none;color:#fff;outline:none;overflow:hidden;
   transition:transform .16s var(--ease-out),box-shadow .2s var(--ease-out);
   user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .btn::before{content:"";position:absolute;inset:0 0 55% 0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0))}
-.fb{background:#0866FF;box-shadow:0 12px 26px -12px rgba(8,102,255,.75)}
+  background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0))}
+.fb{background:#0866FF;box-shadow:0 12px 24px -12px rgba(8,102,255,.8)}
 .ig{background:linear-gradient(100deg,#F58529 0%,#DD2A7B 34%,#8134AF 70%,#515BD4 100%);
-  box-shadow:0 12px 26px -12px rgba(221,42,123,.7)}
+  box-shadow:0 12px 24px -12px rgba(221,42,123,.75)}
 .ig .lbl{text-shadow:0 1px 2px rgba(80,0,40,.3)}
-.btn .ico{position:relative;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;
-  background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.16)}
+.btn .ico{position:relative;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;
+  background:#fff;box-shadow:0 2px 6px rgba(120,40,80,.2)}
 .btn .ico img{display:block;width:36px;height:36px;pointer-events:none}
-.btn .lbl{position:relative;font-size:1.08rem;font-weight:600;line-height:1.2}
-.btn small{display:block;font-size:.84rem;font-weight:450;color:rgba(255,255,255,.9)}
-.btn .arr{position:relative;width:20px;height:20px;opacity:.85;
-  transition:transform .2s var(--ease-out)}
+.btn .lbl{position:relative;font-family:"Baloo 2",Quicksand,sans-serif;font-size:1.1rem;
+  font-weight:600;line-height:1.15}
+.btn small{display:block;font-family:Quicksand,sans-serif;font-size:.84rem;font-weight:500;
+  color:rgba(255,255,255,.92)}
+.btn .arr{position:relative;width:20px;height:20px;opacity:.85;transition:transform .2s var(--ease-out)}
 .btn:active{transform:scale(.975)}
-.fb.lit{transform:scale(.978);box-shadow:0 0 0 4px rgba(8,102,255,.28),0 8px 18px -8px rgba(8,102,255,.6)}
-.ig.lit{transform:scale(.978);box-shadow:0 0 0 4px rgba(221,42,123,.28),0 8px 18px -8px rgba(221,42,123,.6)}
-.btn:focus-visible{box-shadow:0 0 0 3px var(--paper),0 0 0 6px var(--gold)}
+.fb.lit{transform:scale(.978);box-shadow:0 0 0 4px rgba(8,102,255,.26),0 8px 16px -8px rgba(8,102,255,.6)}
+.ig.lit{transform:scale(.978);box-shadow:0 0 0 4px rgba(221,42,123,.26),0 8px 16px -8px rgba(221,42,123,.6)}
+.btn:focus-visible{box-shadow:0 0 0 3px var(--cream),0 0 0 6px var(--accent)}
 @media (hover:hover) and (pointer:fine){
   .btn:hover{transform:translate3d(0,-2px,0)}
   .btn:hover .arr{transform:translate3d(3px,-3px,0);opacity:1}
 }
 
-footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
+footer{margin-top:10px;text-align:center;font-size:.8rem;color:var(--ink-soft);opacity:.85}
 
-.spark{position:fixed;width:12px;height:12px;pointer-events:none;z-index:10;
-  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.spark{position:fixed;width:12px;height:12px;pointer-events:none;z-index:10;border-radius:50%}
 
 .rise{animation:rise .6s both var(--ease-out)}
-.d1{animation-delay:.42s}.d2{animation-delay:.5s}.d3{animation-delay:.58s}
+.d1{animation-delay:.4s}.d2{animation-delay:.48s}.d3{animation-delay:.56s}
 @keyframes rise{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion:reduce){
-  .glow,.floor,.chip .dot,.figure{animation:none}
+  .blob,.hearts i,.ring,.chip .dot,.figure,.glow{animation:none}
+  .lids{display:none}
   .rise{animation:fade .3s both}
   @keyframes fade{from{opacity:0}to{opacity:1}}
 }
 </style>
 </head>
 <body>
-<div class="stage" aria-hidden="true"><i class="glow g1"></i><i class="glow g2"></i><i class="glow g3"></i></div>
+<div class="sky" aria-hidden="true">
+  <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>
+  <div class="hearts"><i></i><i></i><i></i><i></i><i></i></div>
+</div>
 
 <main class="page">
   <p class="chip"><span class="dot" aria-hidden="true"></span>You tapped Rechelle's keychain</p>
 
   <section class="hero" aria-label="Rechelle">
-    <div class="floor" aria-hidden="true"></div>
+    <div class="ring" aria-hidden="true"></div>
     <div class="figure" id="fig" role="button" tabindex="0" aria-label="Say hi to Rechelle">
       <div class="mover" id="mover">
-        <img class="her" id="her" alt="Rechelle standing in a navy suit" draggable="false"
-             width="300" height="1042" src="rechelle.webp">
+        <i class="glow" aria-hidden="true"></i><img class="her" id="her" alt="Rechelle smiling in a navy suit" draggable="false"
+             width="420" height="916" src="rechelle.webp">
+        <img class="lids" id="lids" alt="" aria-hidden="true" draggable="false" src="lids.webp">
       </div>
     </div>
     <div class="bubble" id="bubble" aria-hidden="true">Hi there!</div>
@@ -177,9 +208,9 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
   </section>
 
   <section class="intro rise d1">
-    <p class="role">Let's connect</p>
+    <p class="role">Let's be friends</p>
     <h1>Rechelle Suico</h1>
-    <p>You found my keychain. Pick one below and come say hi.</p>
+    <p>You found my keychain! Pick one below and come say hi.</p>
   </section>
 
   <nav class="links rise d2" aria-label="Social profiles">
@@ -211,21 +242,21 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
     clearTimeout(bt); bt = setTimeout(function(){ bubble.classList.remove('show'); }, ms || 1800);
   }
 
-  var gold = ['#C8963C','#E7C98A','#FFFFFF','#F3E2BC'];
+  var confetti = ['#FF7EB3','#FFD1E3','#C9A7FF','#FFFFFF','#FFC48C'];
   function sparkle(cx, cy, n){
     if(reduce) return;
     for(var i = 0; i < n; i++){
       (function(i){
         var s = document.createElement('div'); s.className = 'spark';
-        s.style.background = gold[i % gold.length]; s.style.left = '0'; s.style.top = '0';
-        var size = 7 + Math.random() * 9; s.style.width = s.style.height = size + 'px';
+        s.style.background = confetti[i % confetti.length]; s.style.left = '0'; s.style.top = '0';
+        var size = 6 + Math.random() * 8; s.style.width = s.style.height = size + 'px';
         document.body.appendChild(s);
-        var a = Math.random() * Math.PI * 2, sp = 140 + Math.random() * 180;
+        var a = Math.random() * Math.PI * 2, sp = 130 + Math.random() * 170;
         var x = cx, y = cy, vx = Math.cos(a) * sp, vy = Math.sin(a) * sp - 150;
         var rot = 0, life = 0, t0 = performance.now();
         function step(t){
           var dt = Math.min((t - t0) / 1000, .033); t0 = t; life += dt;
-          vy += 580 * dt; x += vx * dt; y += vy * dt; rot += 320 * dt;
+          vy += 560 * dt; x += vx * dt; y += vy * dt; rot += 300 * dt;
           s.style.transform = 'translate3d(' + (x - size/2) + 'px,' + (y - size/2) + 'px,0) rotate(' + rot + 'deg)';
           s.style.opacity = Math.max(0, 1 - life / 1);
           if(life < 1) requestAnimationFrame(step); else s.remove();
@@ -235,7 +266,19 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
     }
   }
 
-  // pose springs: she shifts weight, steps toward a link, settles back
+  var lids = document.getElementById('lids');
+  function blink(){
+    if(reduce || !lids) return;
+    lids.style.opacity = 1;
+    setTimeout(function(){ lids.style.opacity = 0; }, 105);
+  }
+  (function blinkLoop(){
+    setTimeout(function(){
+      if(!document.hidden){ blink(); if(Math.random() < .28) setTimeout(blink, 250); }
+      blinkLoop();
+    }, 2300 + Math.random() * 3200);
+  })();
+
   var keys = ['lean', 'dx', 'dy', 'sc'];
   var rest = {lean: 0, dx: 0, dy: 0, sc: 1};
   var pose = {lean: 0, dx: 0, dy: 0, sc: 1};
@@ -247,6 +290,7 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
   function clearSeq(){ timers.forEach(clearTimeout); timers = []; }
 
   function hop(){
+    blink();
     her.classList.remove('hop'); void her.offsetWidth; her.classList.add('hop');
     clearTimeout(her._t); her._t = setTimeout(function(){ her.classList.remove('hop'); }, 650);
   }
@@ -254,9 +298,10 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
   function offer(which, fromUser){
     var btn = which === 'fb' ? btnFb : btnIg, low = which === 'ig';
     clearSeq(); busyUntil = performance.now() + 1700;
-    set({lean: low ? 2.2 : -2.2, dx: low ? 7 : -7, dy: low ? 11 : 7, sc: 1.015});
+    set({lean: low ? 2.4 : -2.4, dx: low ? 6 : -6, dy: low ? 10 : 6, sc: 1.015});
+    later(120, blink);
     later(430, function(){
-      set({dy: low ? 15 : 11, sc: 1.035});
+      set({dy: low ? 14 : 10, sc: 1.035});
       btn.classList.add('lit');
       var r = btn.getBoundingClientRect();
       sparkle(r.left + 34, r.top + r.height / 2, 8);
@@ -267,13 +312,13 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
     later(1150, function(){ set(rest); });
   }
 
-  var lines = ['Hi there!', 'Nice to meet you!', 'Glad you tapped!', 'Say hi below.'];
+  var lines = ['Hi there!', 'Nice to meet you!', 'So glad you tapped!', 'Say hi below!'];
   var li = 0;
   function greet(){
     clearSeq(); set(rest); hop();
     li = (li + 1) % lines.length; say(lines[li]);
     var r = fig.getBoundingClientRect();
-    sparkle(r.left + r.width / 2, r.top + r.height * 0.3, 12);
+    sparkle(r.left + r.width / 2, r.top + r.height * 0.28, 14);
     busyUntil = performance.now() + 900; lastUser = performance.now();
     if(navigator.vibrate) try{ navigator.vibrate(11); }catch(_){}
   }
@@ -319,9 +364,9 @@ footer{margin-top:18px;font-size:.8rem;color:var(--ink-soft);opacity:.8}
       pose[k] += vel[k] * dt;
     });
     var t = now / 1000, m = reduce ? 0 : 1;
-    var bob = Math.sin(t * 1.15) * 3.2 * m;
-    var breath = Math.sin(t * 1.15 + .5) * .004 * m;
-    var sway = Math.sin(t * .52) * .9 * m;
+    var bob = (Math.sin(t * 1.25) * 2.6 + Math.sin(t * 0.47) * 1.4) * m;
+    var breath = Math.sin(t * 1.25 + .5) * .006 * m;
+    var sway = (Math.sin(t * .55) * .8 + Math.sin(t * .23) * .5) * m;
     var lx = now < busyUntil ? 0 : look;
     mover.style.transform =
       'translate3d(' + (pose.dx + lx * 7).toFixed(2) + 'px,' + (pose.dy + bob).toFixed(2) + 'px,0)' +
