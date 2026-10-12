@@ -113,8 +113,8 @@ a,button,[role="button"]{touch-action:manipulation}
   background:radial-gradient(circle,var(--aura) 0%,transparent 68%);
   filter:blur(8px);animation:aura 7s ease-in-out infinite}
 @keyframes aura{50%{transform:scale(1.12);opacity:.75}}
-/* blink = a second full frame stacked exactly on the first, so it can never drift */
-.lids{position:absolute;inset:0;width:100%;height:auto;opacity:0;pointer-events:none}
+/* eyelid strip, position measured from the rendered frames */
+.lids{position:absolute;left:35.2381%;top:21.8868%;width:34.2857%;height:auto;opacity:0;pointer-events:none}
 .her.hop{animation:hop .62s var(--ease-out)}
 @keyframes hop{
   0%{transform:scale(1,1)}
@@ -200,7 +200,7 @@ footer{margin-top:10px;text-align:center;font-size:.8rem;color:var(--ink-soft);o
       <div class="mover" id="mover">
         <i class="glow" aria-hidden="true"></i><img class="her" id="her" alt="Rechelle smiling in a navy suit" draggable="false"
              width="420" height="530" src="rechelle.webp">
-        <img class="lids" id="lids" alt="" aria-hidden="true" draggable="false" width="420" height="530" src="rechelle_blink.webp">
+        <img class="lids" id="lids" alt="" aria-hidden="true" draggable="false" width="144" height="46" src="blink2.webp">
       </div>
     </div>
     <div class="bubble" id="bubble" aria-hidden="true">Hi there!</div>
